@@ -1,6 +1,8 @@
 <h1>Projects</h1>
+ <% @projects.each do |f| %>
  <div class="thumbnail">
-    <a href="<%= project_path(project) %>"><h5>Project: <%= project.name %></h5></a>
-    <h6>Description: <%= truncate(project.description, length: 100) %></h6>
+    <a href="<%= project_path(f) %>"><h5>Project: <%= f.name %></h5></a>
+    <h6>Description: <%= truncate(f.description, length: 100) %></h6>
     <hr>
+    <% end %>
 </div>
