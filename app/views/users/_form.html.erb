@@ -1,4 +1,16 @@
 <%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error-explanation">
+      <h2><%= pluralizae(@user.errors.count, "error") %> prohibited this article from being saved: </h2>
+
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="field">
      <%= f.label :first_name %><br/>
      <%= f.text_field :first_name %>
