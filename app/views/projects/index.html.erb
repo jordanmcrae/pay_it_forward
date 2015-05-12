@@ -1,0 +1,6 @@
+<h1>Projects</h1>
+ <div class="thumbnail">
+    <a href="<%= project_path(project) %>"><h5>Project: <%= project.name %></h5></a>
+    <h6>Description: <%= truncate(project.description, length: 100) %></h6>
+    <hr>
+</div>
