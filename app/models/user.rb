@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :backed_projects, class_name: 'Project'
   has_many :pledges
 
-  validates :password, length: { minimum: 3 }
+  validates :password, length: { minimum: 2 }
   validates :password, confirmation: true
   validates :password_confirmation, presence: true
 
