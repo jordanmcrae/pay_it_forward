@@ -1,4 +1,28 @@
-<% form_for @user do |f| %>
+<%= form_for @user do |f| %>
+  <div class="field">
+     <%= f.label :first_name %><br/>
+     <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+     <%= f.label :last_name %><br/>
+     <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+     <%= f.label :user_name %><br/>
+     <%= f.text_field :user_name %>
+  </div>
+  <div class="field">
+     <%= f.label :address %><br/>
+     <%= f.text_field :address %>
+  </div>
+  <div class="field">
+     <%= f.label :avatar %><br/>
+     <%= f.text_field :avatar %>
+  </div>
+  <div class="field">
+     <%= f.label :password %><br/>
+     <%= f.password_field :password %>
+  </div>
   <div class="field">
      <%= f.label :password %><br/>
      <%= f.password_field :password %>
@@ -6,5 +30,8 @@
   <div class="field">
      <%= f.label :password_confirmation %><br/>
      <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+     <%= f.submit %><br/>
   </div>
 <% end %>
