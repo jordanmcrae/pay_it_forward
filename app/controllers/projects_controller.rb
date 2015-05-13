@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   skip_before_filter :require_login, only: [:show, :index]
-
+  # Allows all users to see all projects and specific projects. From the sorcery gem.
   def new
     @project = Project.new
   end

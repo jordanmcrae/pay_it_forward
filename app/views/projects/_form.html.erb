@@ -17,12 +17,12 @@
 
   <div class="field">
     <%= f.label :start_date %>
-    <%= f.datetime_select :start_date %>
+    <%= f.datetime_select :start_date, discard_hour: true, discard_minute: true, discard_second: true %>
   </div>
 
   <div class="field">
     <%= f.label :end_date %>
-    <%= f.datetime_select :end_date %>
+    <%= f.datetime_select :end_date, discard_hour: true, discard_minute: true, discard_second: true %>
   </div>
 
   <h4>Rewards</h4>
