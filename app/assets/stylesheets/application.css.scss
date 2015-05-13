@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+#nav-main {
+  background-color: white;
+}
+
+#sign-up-text {
+  color: #00A2F8;
+}
+
+#login-text {
+  color: #00A2F8;
+}
+
+#navbar-brand {
+  color: #00DD80;
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 2em;
+}
+
+.header-text {
+  color: #000;
+}
