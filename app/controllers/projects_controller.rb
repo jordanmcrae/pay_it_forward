@@ -13,6 +13,8 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    @project.user_id = current_user.id
+    # current_user.projects.build(project_params)
     if @project.save
       redirect_to root_url
     else
