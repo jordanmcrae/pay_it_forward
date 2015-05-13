@@ -28,7 +28,7 @@
   <h4>Rewards</h4>
 
   <div id="tasks">
-    <%= f.fields_for :rewards do |rewards_form| %>
+    <%= f.fields_for :rewards do |rewards_form| %>  <!-- ADD FOREIGN KEYS -->
       <%= render 'rewards_field', :f => rewards_form %>
     <% end %>
 
@@ -40,3 +40,5 @@
 
   <%= f.submit %>
 <% end %>
+
+<!-- ADD FOREIGN KEYS -->
