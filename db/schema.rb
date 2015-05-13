@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150513142734) do
     t.integer  "backer_limit"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "project_id"
   end
 
   create_table "users", force: :cascade do |t|

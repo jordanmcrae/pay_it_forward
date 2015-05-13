@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  root 'projects#index'
   get 'pledges/create'
 
   get 'pledges/new'
@@ -6,7 +8,7 @@ Rails.application.routes.draw do
   resources :user_sessions
   resources :users, only: [:new, :create]
 
-  resources :projects do
+  resources :projects, only: [:new, :create, :update, :show, :destroy] do
     resources :pledges
   end
 
@@ -17,3 +19,4 @@ Rails.application.routes.draw do
     resources :users
   end
 end
+

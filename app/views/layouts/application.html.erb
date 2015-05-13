@@ -7,6 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<%= link_to "Projects", root_url %>
+<%= link_to "Create a Project", new_project_path %>
   <div id="nav">
     <% if current_user %>
       <%= link_to 'Logout', :logout, method: :post %>
