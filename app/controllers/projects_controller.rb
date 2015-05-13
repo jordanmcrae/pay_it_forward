@@ -1,4 +1,10 @@
 class ProjectsController < ApplicationController
+  skip_before_filter :require_login, only: [:show, :index]
+
+  def new
+    @project = Project.new
+  end
+
   def index
     @projects = Project.all
   end
@@ -7,14 +13,10 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
-  def new
-    @project = Project.new
-  end
-
   def create
+    # current_user.projects.build(project_params) is the same as the two lines below.
     @project = Project.new(project_params)
     @project.user_id = current_user.id
-    # current_user.projects.build(project_params)
     if @project.save
       redirect_to root_url
     else
@@ -27,12 +29,11 @@ class ProjectsController < ApplicationController
   end
 
   def update
-  @project = Project.find(params[:id])
-
+    @project = Project.find(params[:id])
     if @project.update_attributes(project_params)
       redirect_to project_path(@project)
     else
-      render :edit
+      render 'edit'
     end
   end
 

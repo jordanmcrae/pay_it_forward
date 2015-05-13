@@ -1,7 +1,25 @@
-<%= link_to "Back to Projects", root_url %> <% if current_user %> | <span class="label label-danger"><%= link_to "Delete", @project, method: :delete, data: {confirm: "Are you sure?"} %><% end %></span>
+<%= link_to "Back to Projects", root_url %>
+<% if current_user %> | <span class="label label-danger"><%= link_to "Delete", @project, method: :delete, data: {confirm: "Are you sure?"} %><% end %></span>
 
   <h1><%= @project.name %></h1>
   <h3><%= @project.description %></h3>
   <h3><%= @project.funding_goal %></h3>
   <h3><%= @project.start_date %></h3>
   <h3><%= @project.end_date %></h3>
+
+  <h2>Rewards for <%= @project.name %></h2>
+
+  <% @project.rewards.each do |reward| %>
+    <p><%= reward.title %></p>
+    <p><%= reward.description %></p>
+    <p><%= reward.amount %> dollars</p>
+    <p><%= reward.backer_limit %> people</p>
+
+    <%= form_tag project_pledges_path(@project), action: "post" do %>
+      <%= hidden_field_tag 'reward_id', reward.id %>
+      <%= submit_tag "Pledge!" %>
+    <% end %>
+
+    <%= reward.pledges.count %> pledges! (<%= number_to_currency reward.total_pledged %> pledged!)
+  <% end %>
+
