@@ -3,27 +3,49 @@
     | <span class="label label-danger"><%= link_to "Delete", @project, method: :delete, data: {confirm: "Are you sure?"} %>
     </span>
   <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-9 col-md-8">
+      <div id="project-image" class="list-group"><%= image_tag(@project.image_url, class: "img-responsive img-rounded") %></div>
+      <ul class="list-group">
+        <li class="list-group-item"><h1><%= @project.name %></h1></li>
+        <li class="list-group-item"><h3><%= @project.description %></h3></li>
+        <li class="list-group-item"><h3>$<%= (@project.funding_goal - @amount_funded) %> to go!</h3></li>
+        <li class="list-group-item"><h3><%= distance_of_time_in_words_to_now(@project.end_date) %> to go!</h3></li>
+       </ul>
+    </div>
 
-  <h1><%= @project.name %></h1>
-  <h3><%= @project.description %></h3>
-  <h3>$<%= (@project.funding_goal - @amount_funded) %> to go!</h3>
-  <h3><%= distance_of_time_in_words_to_now(@project.end_date) %> to go!</h3>
+    <div class="col-xs-3 col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title" id="reward-header">Rewards</h3>
+        </div>
 
-  <h2>Rewards for <%= @project.name %></h2>
-  <% @project.rewards.each do |reward| %>
-    <p><%= reward.title %></p>
-    <p><%= reward.description %></p>
-    <p><%= reward.amount %> dollars</p>
-    <% leftover = reward.backer_limit - reward.pledges.count %>
-    <% if leftover > 0 %>
-      <%= leftover %> pledges left for this reward
-    <% else %>
-      <%= "No more pledges left for this reward" %>
-    <% end %>
+        <div class="panel-body">
+          <% @project.rewards.each do |reward| %>
+            <h5 id="reward-title"><%= reward.title %></h5>
+            <p><%= reward.description %><hr></p>
+            <p><%= reward.amount %> dollars<hr></p>
+            <p><% leftover = reward.backer_limit - reward.pledges.count %>
+              <% if leftover > 0 %>
+                <%= leftover %> pledges left for this reward
+              <% else %>
+                <%= "No more pledges left for this reward" %>
+              <% end %><hr></p>
 
-    <%= form_tag project_pledges_path(@project), action: "post" do %>
-      <%= hidden_field_tag 'reward_id', reward.id %>
-      <%= submit_tag "Back This Project", hidden: reward.sold_out? %>
-    <% end %>
-  <% end %>
+            <%= form_tag project_pledges_path(@project), action: "post" do %>
+              <%= hidden_field_tag 'reward_id', reward.id %>
+              <%= submit_tag "Back This Project", hidden: reward.sold_out? %>
+            <% end %>
 
+            <% if ((reward.backer_limit) - (reward.pledges.count)) > 0 %>
+              <%= (reward.backer_limit) - (reward.pledges.count) %> pledges left for this reward. (<%= number_to_currency reward.total_pledged %> pledged!)
+            <% else %>
+              <%= "No more pledges left." %>
+            <% end %>
+            <hr><hr><hr>
+          <% end %>
+        </div>
+      </div>
+    </div>
+</div>

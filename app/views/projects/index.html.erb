@@ -1,16 +1,17 @@
 <h3 class="header-text">Featured Projects</h3>
 
-
-<% @projects.each_slice(3) do |projects| %>
+<div id="projects">
+  <% @projects.each_slice(3) do |projects| %>
 
     <div class="row">
       <% projects.each do |project| %>
         <div class="col-xs-6 col-md-4">
+          <a href="<%= project_path(project) %>"><%= image_tag(project.image_url(:thumb), class: "img-rounded") %></a>
           <a href="<%= project_path(project) %>"><h5>Project: <%= project.name %></h5></a>
           <h6>Description: <%= truncate(project.description, length: 100) %></h6>
           <hr>
         </div>
       <% end %>
     </div>
-
-<% end %>
+  <% end %>
+</div>

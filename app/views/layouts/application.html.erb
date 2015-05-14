@@ -5,29 +5,33 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 <body>
+  <nav class="navbar navbar-default" id="nav-main">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand" id="navbar-brand" href="/">Pay It Forward</a>
+      </div>
 
-<nav class="navbar navbar-default" id="nav-main">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <a class="navbar-brand" id="navbar-brand" href="/">Pay It Forward</a>
-    </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+        <ul class="nav navbar-nav navbar-left">
+          <li><a href="/">Discover</a></li>
+          <li><a href="/projects/new">Start</a></li>
+        </ul>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-      <ul class="nav navbar-nav navbar-left">
-        <li><a href="/">Discover</a></li>
-        <li><a href="/projects/new">Start</a></li>
-      </ul>
-
-    <div>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
+      <div>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+          <%= form_tag projects_path, method: :get, authentication: false, id: 'search-form' do %>
+            <%= text_field_tag :search, params[:search], class: "form-control" %>
+            <%= submit_tag "search", hidden: true %>
+          <% end %>
+          </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <li><%= link_to "Logout", :logout, method: :post %></li>
         <% else %>
@@ -35,9 +39,9 @@
           <li><%= link_to "Login", :login, :id => "login-text" %></li>
         <% end %>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
 
 
 
@@ -46,7 +50,7 @@
     <p id="alert"><%= flash[:alert] %></p>
   </div>
 
-  <div class="container">
+  <div class="container projects">
     <%= yield %>
   </div>
 
