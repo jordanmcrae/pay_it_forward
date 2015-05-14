@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @amount_funded = @project.pledges.map{|x| x.reward.amount }.sum
   end
 
   def create
