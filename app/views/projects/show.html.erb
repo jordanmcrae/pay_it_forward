@@ -1,31 +1,29 @@
 <%= link_to "Back to Projects", root_url %>
-<% if current_user && @project.user_id == current_user.id %>
+  <% if current_user && @project.user_id == current_user.id %>
     | <span class="label label-danger"><%= link_to "Delete", @project, method: :delete, data: {confirm: "Are you sure?"} %>
     </span>
   <% end %>
 
   <h1><%= @project.name %></h1>
   <h3><%= @project.description %></h3>
-  <h3>$<%= @project.funding_goal - @amount_funded %> to go!</h3>
-  <h3><%= distance_of_time_in_words_to_now(@project.end_date) %> to go.</h3>
+  <h3>$<%= (@project.funding_goal - @amount_funded) %> to go!</h3>
+  <h3><%= distance_of_time_in_words_to_now(@project.end_date) %> to go!</h3>
 
   <h2>Rewards for <%= @project.name %></h2>
-
   <% @project.rewards.each do |reward| %>
     <p><%= reward.title %></p>
     <p><%= reward.description %></p>
     <p><%= reward.amount %> dollars</p>
     <% leftover = reward.backer_limit - reward.pledges.count %>
     <% if leftover > 0 %>
-      <%= leftover %> pledges left for this reward.
+      <%= leftover %> pledges left for this reward
     <% else %>
-      <%= "No more pledges left." %>
+      <%= "No more pledges left for this reward" %>
     <% end %>
 
     <%= form_tag project_pledges_path(@project), action: "post" do %>
       <%= hidden_field_tag 'reward_id', reward.id %>
-      <%= submit_tag "Back This Project" %>
+      <%= submit_tag "Back This Project", hidden: reward.sold_out? %>
     <% end %>
-
   <% end %>
 

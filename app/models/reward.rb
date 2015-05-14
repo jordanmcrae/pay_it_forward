@@ -3,6 +3,6 @@ class Reward < ActiveRecord::Base
   has_many :pledges
 
   def sold_out?
-    backer_limit >= pledges.count
+    backer_limit <= pledges.count
   end
 end
