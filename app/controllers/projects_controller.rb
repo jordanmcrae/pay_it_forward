@@ -6,7 +6,16 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
+   @projects = if params[:search]
+      Project.where("LOWER(name) LIKE LOWER(?)", "%#{params[:search]}%")
+    else
+      Project.all
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -16,6 +25,8 @@ class ProjectsController < ApplicationController
   def create
     # current_user.projects.build(project_params) is the same as the two lines below.
     @project = Project.new(project_params)
+    @project.image = params[:file]
+
     @project.user_id = current_user.id
     if @project.save
       redirect_to root_url
@@ -45,6 +56,6 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:name, :description, :funding_goal, :start_date, :end_date, rewards_attributes: [:title, :description, :amount, :backer_limit])
+    params.require(:project).permit(:name, :description, :funding_goal, :start_date, :end_date, :image, rewards_attributes: [:title, :description, :amount, :backer_limit])
   end
 end

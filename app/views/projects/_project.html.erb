@@ -1,0 +1,3 @@
+<a href="<%= project_path(project) %>"><%= image_tag(project.image_url(:thumb), class: "img-rounded") %></a>
+<a href="<%= project_path(project) %>"><h5>Project: <%= project.name %></h5></a>
+<h6>Description: <%= truncate(project.description, length: 100) %></h6>
