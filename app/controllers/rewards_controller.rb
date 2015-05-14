@@ -18,10 +18,11 @@ class RewardsController < ApplicationController
   def update
   @reward = Reward.find(params[:id])
 
-  if @reward.update_attributes(reward_params)
-    redirect_to reward_path(@reward)
-  else
-    render :edit
+    if @reward.update_attributes(reward_params)
+      redirect_to reward_path(@reward)
+    else
+      render :edit
+    end
   end
 
   def destroy
