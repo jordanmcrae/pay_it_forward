@@ -1,7 +1,7 @@
 <h3 class="header-text">Featured Projects</h3>
 
-
-<% @projects.each_slice(3) do |projects| %>
+<div id="projects">
+  <% @projects.each_slice(3) do |projects| %>
 
     <div class="row">
       <% projects.each do |project| %>
@@ -13,5 +13,5 @@
         </div>
       <% end %>
     </div>
-
-<% end %>
+  <% end %>
+</div>
