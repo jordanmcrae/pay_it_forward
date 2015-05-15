@@ -23,12 +23,10 @@
         </ul>
 
       <div>
-        <form class="navbar-form navbar-left" role="search">
+        <form id="search-form" class="navbar-form navbar-left" role="search">
           <div class="form-group">
-          <%= form_tag projects_path, method: :get, authentication: false, id: 'search-form' do %>
             <%= text_field_tag :search, params[:search], class: "form-control" %>
             <%= submit_tag "search", hidden: true %>
-          <% end %>
           </div>
         </form>
         <ul class="nav navbar-nav navbar-right">

@@ -37,13 +37,7 @@
               <%= hidden_field_tag 'reward_id', reward.id %>
               <%= submit_tag "Back This Project", hidden: reward.sold_out? %>
             <% end %>
-
-            <% if ((reward.backer_limit) - (reward.pledges.count)) > 0 %>
-              <%= (reward.backer_limit) - (reward.pledges.count) %> pledges left for this reward. (<%= number_to_currency reward.total_pledged %> pledged!)
-            <% else %>
-              <%= "No more pledges left." %>
-            <% end %>
-            <hr><hr><hr>
+            <hr><hr>
           <% end %>
         </div>
       </div>
